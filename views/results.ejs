@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - CRX Explorer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results for "<%= query %>"</h1>
+        <a href="/" class="back-link">Back to Home</a>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } else if (results.length === 0) { %>
+            <p>No results found.</p>
+        <% } else { %>
+            <ul class="results-list">
+            <% results.forEach(result => { %>
+                <li class="result-item">
+                    <h2>
+                        <% if (result.link) { %>
+                            <a href="<%= result.link %>" target="_blank" class="extension-name"><%= result.name %></a>
+                        <% } else { %>
+                            <%= result.name %>
+                        <% } %>
+                    </h2>
+                    <p>Version: <%= result.version || 'N/A' %></p>
+                    <p>ID: <%= result.id || 'N/A' %></p>
+                    <% if (result.link) { %>
+                        <a href="<%= result.link %>" target="_blank" class="extension-link">View in Chrome Web Store</a>
+                    <% } %>
+                </li>
+            <% }) %>
+            </ul>
+        <% } %>
+    </div>
+</body>
+</html>
